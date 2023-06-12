@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  generation:
+    image: #todo image is not created yet
+    environment:
+      HOST: ${HOST}
+      PORT: ${PORT}
+      TOPIC: ${TOPIC}
+      DATA_RECORDS: ${DATA_RECORDS}
+
+networks:
+  default:
+    name: kafka_default
+
