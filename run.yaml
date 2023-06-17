@@ -1,13 +1,55 @@
 version: '3.9'
 
+volumes:
+  logs:
+    external: true
+
 services:
+
   generation:
-    image: #todo image is not created yet
+    image: docker22de/generation:1.0
     environment:
       HOST: ${HOST}
       PORT: ${PORT}
       TOPIC: ${TOPIC}
       DATA_RECORDS: ${DATA_RECORDS}
+
+  language_consumer:
+    image: docker22de/language_consumer:1.0
+    environment:
+      HOST: ${HOST}
+      PORT: ${PORT}
+      TOPIC: ${TOPIC}
+      LANGUAGE_CONSUMER_NUMBER: ${LANGUAGE_CONSUMER_NUMBER}
+    volumes:
+      - logs:/app/logs
+    depends_on:
+      - generation
+
+  users_consumer:
+    image: docker22de/users_consumer:1.0
+    environment:
+      HOST: ${HOST}
+      PORT: ${PORT}
+      TOPIC: ${TOPIC}
+      USERS_CONSUMER_NUMBER: ${USERS_CONSUMER_NUMBER}
+    volumes:
+      - logs:/app/logs
+    depends_on:
+      - generation
+
+  sentiments_consumer:
+    image: docker22de/sentiments_consumer:1.0
+    environment:
+      HOST: ${HOST}
+      PORT: ${PORT}
+      TOPIC: ${TOPIC}
+      SENTIMENTS_CONSUMER_NUMBER: ${SENTIMENTS_CONSUMER_NUMBER}
+    volumes:
+      - logs:/app/logs
+    depends_on:
+      - generation
+
 
 networks:
   default:
