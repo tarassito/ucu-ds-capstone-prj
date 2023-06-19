@@ -1,6 +1,5 @@
 import logging
 import os
-
 import pandas as pd
 from kafka import KafkaProducer
 
@@ -19,9 +18,9 @@ def on_send_success(record_metadata, producer_id):
 
 def produce_data(producer_id, start_record, end_record):
     producer = KafkaProducer(bootstrap_servers=[f'{HOST}:{PORT}'])
-
     data = pd.read_csv('chatgpt1.csv', encoding='utf-8',
                        usecols=['Datetime', 'Tweet Id', 'Text', 'Username', 'Language'])
+    data.iloc[:, 2] = data.iloc[:, 2].str.replace(',', '')
     data = data[start_record:end_record]
     print(data.head())
 
