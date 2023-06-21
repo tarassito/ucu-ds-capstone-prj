@@ -12,7 +12,6 @@ services:
       HOST: ${HOST}
       PORT: ${PORT}
       TOPIC: ${TOPIC}
-#      KAFKA_AUTO_CREATE_TOPICS_ENABLE: False
     volumes:
       - logs:/app/logs
 
