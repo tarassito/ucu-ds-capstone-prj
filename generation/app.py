@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.INFO)
 
 HOST = os.getenv("HOST", 'localhost')
 PORT = os.getenv("PORT", '8097')
-TOPIC = os.getenv("TOPIC", '5part-topic')
+TOPIC = os.getenv("TOPIC", '8part-topic')
 DATA_RECORDS = int(os.getenv("DATA_RECORDS", '30'))
 
 

@@ -1,0 +1,23 @@
+version: '3.9'
+
+volumes:
+  logs:
+    external: true
+
+services:
+
+  statistics:
+    image: docker22de/statistics:1.0
+    environment:
+      HOST: ${HOST}
+      PORT: ${PORT}
+      TOPIC: ${TOPIC}
+#      KAFKA_AUTO_CREATE_TOPICS_ENABLE: False
+    volumes:
+      - logs:/app/logs
+
+
+networks:
+  default:
+    name: kafka_default
+
