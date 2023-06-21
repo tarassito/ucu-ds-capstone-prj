@@ -7,13 +7,15 @@ volumes:
 services:
 
   statistics:
-    image: docker22de/statistics:1.0
+    image: tarasssito/ucu-ds-statistics
     environment:
       HOST: ${HOST}
       PORT: ${PORT}
       TOPIC: ${TOPIC}
     volumes:
       - logs:/app/logs
+    ports:
+      - "6066:6066"
 
 
 networks:
