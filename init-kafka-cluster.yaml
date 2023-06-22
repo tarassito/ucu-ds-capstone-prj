@@ -62,8 +62,7 @@ services:
       kafka-topics --bootstrap-server kafka3:9092 --list
 
       echo -e 'Creating kafka topics'
-      kafka-topics --bootstrap-server kafka3:9092 --create --if-not-exists --topic 2part-topic --replication-factor 3 --partitions 2
-      kafka-topics --bootstrap-server kafka3:9092 --create --if-not-exists --topic 5part-topic --replication-factor 3 --partitions 5
+      kafka-topics --bootstrap-server kafka3:9092 --create --if-not-exists --topic 8part-topic --replication-factor 3 --partitions 8
 
       echo -e 'Successfully created the following topics:'
       kafka-topics --bootstrap-server kafka3:9092 --list

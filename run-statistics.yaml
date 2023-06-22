@@ -1,0 +1,24 @@
+version: '3.9'
+
+volumes:
+  logs:
+    external: true
+
+services:
+
+  statistics:
+    image: tarasssito/ucu-ds-statistics
+    environment:
+      HOST: ${HOST}
+      PORT: ${PORT}
+      TOPIC: ${TOPIC}
+    volumes:
+      - logs:/app/logs
+    ports:
+      - "6066:6066"
+
+
+networks:
+  default:
+    name: kafka_default
+

@@ -1,16 +1,18 @@
 ***Prerequisite***:
  - docker must be installed
- - virtual env must be installed (`pip install kafka-python==2.0.2 pandas==2.0.1`)
 
 **How to run:**  
 1. Run kafka cluster: `docker compose -f init-kafka-cluster.yaml up` Cluster is created 
-with 3 nodes and 2 topics (5 and 10 partitions topics).
+with 3 nodes and one 8partition topic. Check if all containers is running. If some of containers stopped
+run it manually with `docker run CONTAINER_ID`
 
-2. To generate data from `chatgpt1.csv` dataset to 
-kafka topic:  
-    - go inside generation folder - `cd generation`
-    - run `python app.py`  
+2. Run statistic microservice `docker compose -f run-statistics.yaml up`
+
+3. Run other microservices `docker compose -f run-microservices.yaml up`
+
+4. To check statistics open web browser use this URLs:
+    - for language statistic - http://localhost:6066/languages
+    - for sentiment -  http://localhost:6066/sentiments
+    - for top10 user - http://localhost:6066/users
     
-3. Data should be in `5part-topic`. To check this use
-command - `docker exec --interactive --tty kafka1 kafka-console-consumer --bootstrap-server localhost:9092 --topic 5part-topic --from-beginning
-`
+5. To finish the work - `docker compose -f run-microservices.yaml -f run-statistics.yaml -f init-kafka-cluster.yaml down`
